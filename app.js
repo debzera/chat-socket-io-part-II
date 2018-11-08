@@ -8,6 +8,9 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 
+var port_number = http.listen(process.env.PORT || 3000);
+app.listen(port_number);
+
 app.get('/assets/css.css', function (req, res) {
     res.sendFile(__dirname + '/assets/css.css');
 });
@@ -30,9 +33,4 @@ io.on("connection", function (client) {
         io.emit("update", clients[client.id] + " deixou o servidor.");
         delete clients[client.id];
     });
-});
-
-
-http.listen(3000, function () {
-    console.log('ouvindo na porta 3000');
 });
